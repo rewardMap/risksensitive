@@ -1,21 +1,23 @@
 try:
     from psychopy.visual import ImageStim, TextBox2
 except ModuleNotFoundError:
-    from rewardgym.psychopy_stubs import ImageStim, TextBox2
+    from rewardgym.psychopy_render.psychopy_stubs import ImageStim, TextBox2
 
 try:
-    from ....stimuli import make_card_stimulus, fixation_cross
+    from ....stimuli import fixation_cross, make_card_stimulus
 except ImportError:
     from rewardgym.stimuli import make_card_stimulus, fixation_cross
 
-import pathlib
 import json
+import pathlib
 
-instructions_path = pathlib.Path(__file__).parent.resolve() / "assets" / "instructions_en.json"
+instructions_path = (
+    pathlib.Path(__file__).parent.resolve() / "assets" / "instructions_en.json"
+)
 instructions = json.loads(instructions_path.read_text())
 
-def instructions_psychopy(instructions=instructions):
 
+def instructions_psychopy(instructions=instructions):
     fix = fixation_cross()
     card1 = make_card_stimulus(
         {
