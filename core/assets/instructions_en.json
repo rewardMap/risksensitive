@@ -1,0 +1,6 @@
+{
+    "0.0": "In this game you will see five different images.\nEach image has a different value.\nSome images will always give you the same points, some images will give you points with 50% probability.",
+    "1.0": "You will sometimes see a single image on the left or the right side of the screen. You must select this image by pressing LEFT if it is on the left and RIGHT if it is on the right.\n",
+    "2.0": "Sometimes, you have to decide between two images.\nChoose in a way, that will earn you the most points.\nPress LEFT to select the image on the left.\nPress RIGHT to select the image on the right.",
+    "3.0": "Remember:\nPress LEFT to select the image on the left.\nPress RIGHT to select the image on the right."
+}
