@@ -83,6 +83,7 @@ def get_psychopy_info(
         target="reward",
         name="reward",
         bar_total=fullpoints,
+        rl_label="reward"
     )
 
     base_stim = ImageStimulus(
@@ -90,9 +91,9 @@ def get_psychopy_info(
     )
     fix_iti = BaseStimulus(duration=1.5, name="iti")
 
-    cue_disp = ConditionBasedDisplay(0.05, name="cue", image_map=image_map)
+    cue_disp = ConditionBasedDisplay(0.05, name="cue", image_map=image_map, rl_label="obs")
     sel_disp = ConditionBasedDisplay(
-        1.5, with_action=True, name="selection", image_map=image_map
+        1.5, with_action=True, name="selection", image_map=image_map, rl_label="obs",
     )
 
     final_step = [
@@ -112,7 +113,7 @@ def get_psychopy_info(
             "psychopy": [
                 base_stim,
                 cue_disp,
-                ActionStimulus(duration=2.0, timeout_action=None, key_dict=key_dict),
+                ActionStimulus(duration=2.0, timeout_action=None, key_dict=key_dict, rl_label="action"),
             ]
         },
         1: {"psychopy": final_step},
