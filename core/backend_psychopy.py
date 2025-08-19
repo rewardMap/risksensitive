@@ -68,9 +68,9 @@ def risksensitive_stimuli(random_state, stim_defaults=STIMULUS_DEFAULTS):
 
 
 def get_psychopy_info(
-    seed=111, key_dict={"left": 0, "right": 1}, external_stimuli=None, fullpoints=None, **kwargs
+    random_state=111, key_dict={"left": 0, "right": 1}, external_stimuli=None, fullpoints=None, **kwargs
 ):
-    random_state = check_random_state(seed)
+    random_state = check_random_state(random_state)
 
     if external_stimuli is None:
         image_map, stimuli = risksensitive_stimuli(random_state=random_state)

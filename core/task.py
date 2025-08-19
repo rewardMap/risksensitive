@@ -17,20 +17,20 @@ except ImportError:
 
 def get_task(
     render_backend: Literal["pygame", "psychopy"] = None,
-    seed: Union[int, np.random.Generator] = 1000,
+    random_state: Union[int, np.random.Generator] = 1000,
     key_dict=None,
     **kwargs,
 ):
-    seed = check_random_state(seed)
+    random_state = check_random_state(random_state)
     yaml_file = pathlib.Path(__file__).parents[1].resolve() / "task.yaml"
     info_dict, environment_graph  = load_task_from_yaml(yaml_file)
 
     reward_structure = {
-        1: BaseReward(reward=[0], seed=seed),
-        2: BaseReward(reward=[20], seed=seed),
-        3: BaseReward(reward=[40], seed=seed),
-        4: PseudoRandomReward(reward_list=[40, 40, 40, 40, 0, 0, 0, 0], seed=seed),
-        5: PseudoRandomReward(reward_list=[80, 80, 80, 80, 0, 0, 0, 0], seed=seed),
+        1: BaseReward(reward=[0], random_state=random_state),
+        2: BaseReward(reward=[20], random_state=random_state),
+        3: BaseReward(reward=[40], random_state=random_state),
+        4: PseudoRandomReward(reward_list=[40, 40, 40, 40, 0, 0, 0, 0], random_state=random_state),
+        5: PseudoRandomReward(reward_list=[80, 80, 80, 80, 0, 0, 0, 0], random_state=random_state),
     }
 
     action_space = list(reward_structure.keys())
@@ -75,7 +75,7 @@ def get_task(
         if key_dict is None:
             key_dict = {"left": 0, "right": 1}
 
-        psychopy_dict, _ = get_psychopy_info(seed=seed, key_dict=key_dict, fullpoints=info_dict['meta']['fullpoints'])
+        psychopy_dict, _ = get_psychopy_info(random_state=random_state, key_dict=key_dict, fullpoints=info_dict['meta']['fullpoints'])
         info_dict.update(psychopy_dict)
 
     return environment_graph, reward_structure, info_dict

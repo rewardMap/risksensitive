@@ -66,7 +66,7 @@ def get_configs(stimulus_set: str = "1"):
 
     """
 
-    seed = check_random_state(int(stimulus_set))
+    random_state = check_random_state(int(stimulus_set))
 
     blocks = 3
 
@@ -115,8 +115,8 @@ def get_configs(stimulus_set: str = "1"):
             "save-40_risky-80",
             "risky-80_save-40",
         ] * 3 + [
-            seed.choice(["save-20_risky-40", "risky-40_save-20"]),
-            seed.choice(["save-40_risky-80", "risky-80_save-40"]),
+            random_state.choice(["save-20_risky-40", "risky-40_save-20"]),
+            random_state.choice(["save-40_risky-80", "risky-80_save-40"]),
         ]
         risky_non_equal_ev = ["save-20_risky-80", "risky-80_save-20"] * 4
         forced_choices = (
@@ -137,11 +137,11 @@ def get_configs(stimulus_set: str = "1"):
             ]
             * 2
             + [
-                seed.choice(["none_null", "null_none"]),
-                seed.choice(["none_save-20", "save-20_none"]),
-                seed.choice(["none_save-40", "save-40_none"]),
-                seed.choice(["none_risky-40", "risky-40_none"]),
-                seed.choice(["none_risky-80", "risky-80_none"]),
+                random_state.choice(["none_null", "null_none"]),
+                random_state.choice(["none_save-20", "save-20_none"]),
+                random_state.choice(["none_save-40", "save-40_none"]),
+                random_state.choice(["none_risky-40", "risky-40_none"]),
+                random_state.choice(["none_risky-80", "risky-80_none"]),
             ]
         )
 
@@ -159,7 +159,7 @@ def get_configs(stimulus_set: str = "1"):
             "save-20_save-40",
             "save-40_save-20",
         ] + [
-            seed.choice(
+            random_state.choice(
                 [
                     "save-40_risky-40",
                     "risky-40_save-40",
@@ -169,7 +169,7 @@ def get_configs(stimulus_set: str = "1"):
                     "save-40_null",
                 ]
             ),
-            seed.choice(
+            random_state.choice(
                 [
                     "null_risky-40",
                     "risky-40_null",
@@ -191,7 +191,7 @@ def get_configs(stimulus_set: str = "1"):
         approve = False
 
         while not approve:
-            conditions_proposal = seed.permutation(condition_template).tolist()
+            conditions_proposal = random_state.permutation(condition_template).tolist()
 
             approve = (
                 all(
@@ -227,7 +227,7 @@ def get_configs(stimulus_set: str = "1"):
 
         conditions.extend(conditions_proposal)
 
-        iti = seed.permutation(iti_template).tolist()
+        iti = random_state.permutation(iti_template).tolist()
         itis.extend(iti)
 
     config = {
