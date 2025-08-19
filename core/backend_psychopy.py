@@ -7,7 +7,7 @@ try:
         generate_stimulus_properties,
         make_card_stimulus,
     )
-    from ....utils import check_seed
+    from ....utils import check_random_state
     from ....psychopy_render import (
         ActionStimulus,
         BaseStimulus,
@@ -24,7 +24,7 @@ except ImportError:
         make_card_stimulus,
     )
 
-    from rewardgym import check_seed
+    from rewardgym import check_random_state
 
     from rewardgym.psychopy_render import (
         ActionStimulus,
@@ -35,7 +35,7 @@ except ImportError:
     )
 
 def risksensitive_stimuli(random_state, stim_defaults=STIMULUS_DEFAULTS):
-    random_state = check_seed(random_state)
+    random_state = check_random_state(random_state)
     stim_properties = []
 
     stim_defaults = deepcopy(stim_defaults)
@@ -70,7 +70,7 @@ def risksensitive_stimuli(random_state, stim_defaults=STIMULUS_DEFAULTS):
 def get_psychopy_info(
     seed=111, key_dict={"left": 0, "right": 1}, external_stimuli=None, fullpoints=None, **kwargs
 ):
-    random_state = check_seed(seed)
+    random_state = check_random_state(seed)
 
     if external_stimuli is None:
         image_map, stimuli = risksensitive_stimuli(random_state=random_state)

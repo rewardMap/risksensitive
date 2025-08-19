@@ -7,11 +7,11 @@ import pathlib
 
 try:
     from ....reward_classes import BaseReward, PseudoRandomReward
-    from ....utils import check_seed
+    from ....utils import check_random_state
     from ...yaml_tools import load_task_from_yaml
 except ImportError:
     from rewardgym.reward_classes import BaseReward, PseudoRandomReward
-    from rewardgym import check_seed
+    from rewardgym import check_random_state
     from rewardgym.tasks.yaml_tools import load_task_from_yaml
 
 
@@ -21,7 +21,7 @@ def get_task(
     key_dict=None,
     **kwargs,
 ):
-    seed = check_seed(seed)
+    seed = check_random_state(seed)
     yaml_file = pathlib.Path(__file__).parents[1].resolve() / "task.yaml"
     info_dict, environment_graph  = load_task_from_yaml(yaml_file)
 
