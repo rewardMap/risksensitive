@@ -1,10 +1,5 @@
-
-try:
-    from ....pygame_render.stimuli import BaseAction, BaseDisplay, BaseText
-    from ....pygame_render.task_stims import FormatTextRiskSensitive, feedback_block
-except ImportError:
-    from rewardgym.pygame_render.stimuli import BaseAction, BaseDisplay, BaseText
-    from rewardgym.pygame_render.task_stims import FormatTextRiskSensitive, feedback_block
+from rewardgym.pygame_render.stimuli import BaseAction, BaseDisplay, BaseText
+from rewardgym.pygame_render.task_stims import FormatTextRiskSensitive, feedback_block
 
 def get_pygame_info(action_map, window_size = 256):
 

@@ -5,14 +5,9 @@ from typing import Literal, Union
 import numpy as np
 import pathlib
 
-try:
-    from ....reward_classes import BaseReward, PseudoRandomReward
-    from ....utils import check_random_state
-    from ...yaml_tools import load_task_from_yaml
-except ImportError:
-    from rewardgym.reward_classes import BaseReward, PseudoRandomReward
-    from rewardgym import check_random_state
-    from rewardgym.tasks.yaml_tools import load_task_from_yaml
+from rewardgym.reward_classes import BaseReward, PseudoRandomReward
+from rewardgym import check_random_state
+from rewardgym.tasks.yaml_tools import load_task_from_yaml
 
 
 def get_task(

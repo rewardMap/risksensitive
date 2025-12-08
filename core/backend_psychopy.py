@@ -1,38 +1,21 @@
 from copy import deepcopy
 
-try:
-    from ....stimuli import (
-        STIMULUS_DEFAULTS,
-        fixation_cross,
-        generate_stimulus_properties,
-        make_card_stimulus,
-    )
-    from ....utils import check_random_state
-    from ....psychopy_render import (
-        ActionStimulus,
-        BaseStimulus,
-        FeedBackStimulus,
-        ImageStimulus,
-        ConditionBasedDisplay,
-    )
+from rewardgym.stimuli import (
+    STIMULUS_DEFAULTS,
+    fixation_cross,
+    generate_stimulus_properties,
+    make_card_stimulus,
+)
 
-except ImportError:
-    from rewardgym.stimuli import (
-        STIMULUS_DEFAULTS,
-        fixation_cross,
-        generate_stimulus_properties,
-        make_card_stimulus,
-    )
+from rewardgym import check_random_state
 
-    from rewardgym import check_random_state
-
-    from rewardgym.psychopy_render import (
-        ActionStimulus,
-        BaseStimulus,
-        FeedBackStimulus,
-        ImageStimulus,
-        ConditionBasedDisplay,
-    )
+from rewardgym.psychopy_render import (
+    ActionStimulus,
+    BaseStimulus,
+    FeedBackStimulus,
+    ImageStimulus,
+    ConditionBasedDisplay,
+)
 
 def risksensitive_stimuli(random_state, stim_defaults=STIMULUS_DEFAULTS):
     random_state = check_random_state(random_state)

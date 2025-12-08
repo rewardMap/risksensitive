@@ -1,9 +1,5 @@
-try:
-    from rewardgym.utils import check_random_state
-    from rewardgym.task.utils import check_conditions_not_following, check_condition_present_or
-except ImportError:
-    from ...utils import check_conditions_not_following, check_condition_present_or
-    from ....utils import check_random_state
+from rewardgym.utils import check_random_state
+from rewardgym.tasks.utils import check_conditions_not_following, check_condition_present_or
 
 
 def get_configs(stimulus_set: str = "1"):

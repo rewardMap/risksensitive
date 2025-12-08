@@ -3,10 +3,7 @@ try:
 except ModuleNotFoundError:
     from rewardgym.psychopy_render.psychopy_stubs import ImageStim, TextBox2
 
-try:
-    from ....stimuli import fixation_cross, make_card_stimulus
-except ImportError:
-    from rewardgym.stimuli import make_card_stimulus, fixation_cross
+from rewardgym.stimuli import make_card_stimulus, fixation_cross
 
 import json
 import pathlib
