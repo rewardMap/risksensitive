@@ -70,13 +70,14 @@ def get_psychopy_info(
     )
 
     base_stim = ImageStimulus(
-        image_paths=[fixation_cross()], duration=0.1, name=None, autodraw=True
+        image_paths=[fixation_cross()], duration=0.1, autodraw=True, name="fixation"
     )
-    fix_iti = BaseStimulus(duration=1.5, name="iti")
 
-    cue_disp = ConditionBasedDisplay(0.05, name="cue", image_map=image_map, rl_label="obs")
+    fix_iti = BaseStimulus(duration=1.5, name="iti", rl_label='obs')
+
+    cue_disp = ConditionBasedDisplay(0.0, name="cue", image_map=image_map, rl_label="obs")
     sel_disp = ConditionBasedDisplay(
-        1.5, with_action=True, name="selection", image_map=image_map, rl_label="obs",
+        1.5, with_action=True, name="selection", image_map=image_map,
     )
 
     final_step = [
@@ -96,7 +97,7 @@ def get_psychopy_info(
             "psychopy": [
                 base_stim,
                 cue_disp,
-                ActionStimulus(duration=2.0, timeout_action=None, key_dict=key_dict, rl_label="action"),
+                ActionStimulus(duration=2.0, timeout_action=None, key_dict=key_dict, rl_label="action", noflip=True),
             ]
         },
         1: {"psychopy": final_step},
