@@ -9,16 +9,9 @@ from rewardgym.stimuli import (
 
 from rewardgym import check_random_state
 
-from rewardgym.psychopy_render import (
-    ActionStimulus,
-    BaseStimulus,
-    FeedBackStimulus,
-    ImageStimulus,
-    ConditionBasedDisplay,
-)
-
 from rewardgym.render.passive_routines import PresentationRoutine, StateBasedDisplay, FeedBackRoutine
 from rewardgym.render import ImageDefinition
+from rewardgym.render.response_routines import NAFCRoutine
 
 
 def risksensitive_stimuli(random_state, stim_defaults=STIMULUS_DEFAULTS):
@@ -48,8 +41,8 @@ def risksensitive_stimuli(random_state, stim_defaults=STIMULUS_DEFAULTS):
     stimuli = {}
 
     for n in range(5):
-        image_map[n + 1] = make_card_stimulus(stim_properties[n])
-        stimuli[n + 1] = stim_properties[n]
+        image_map[n] = make_card_stimulus(stim_properties[n])
+        stimuli[n] = stim_properties[n]
 
     return image_map, stimuli
 
@@ -78,13 +71,24 @@ def get_psychopy_info(
 
     fix_iti = PresentationRoutine(duration=1.5, name="iti", rl_label='obs')
 
-    cue_disp = StateBasedDisplay(duration=0.0, name="cue", state_definition_map=image_map, rl_label="obs")
-    sel_disp = StateBasedDisplay(
-        duration=1.5, selection=True, name="selection", state_definition_map=image_map,
+    selection_disp = NAFCRoutine(
+        name="response",
+        duration=2.0,
+        key_dict=key_dict,
+        rl_label="action",
+        stimulus_mapping=image_map,
+        presentation_settings={
+            "rl_label_before": "obs",
+            "name_before": "cue",
+            "duration_after": 1.5,
+            "present_after": True,
+            "name_after": "selection"
+        },
+        positions = {0: (-350, 0), 1: (350, 0)},
+        highlight_selected=True
     )
 
     final_step = [
-        sel_disp,
         PresentationRoutine(
                 stimulus_definitions=[ImageDefinition(image=fixation_cross(), name="fixation", autoDraw=False)], duration=0.5, name="reward-delay"
             ),
@@ -96,8 +100,7 @@ def get_psychopy_info(
         0: {
             "psychopy": [
                 base_stim,
-                cue_disp,
-                ActionStimulus(duration=2.0, timeout_action=None, key_dict=key_dict, rl_label="action", flip=False),
+                selection_disp,
             ]
         },
         1: {"psychopy": final_step},
