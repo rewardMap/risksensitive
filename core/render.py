@@ -1,17 +1,18 @@
 from copy import deepcopy
 
+from rewardgym import check_random_state
+from rewardgym.render import ImageDefinition
+from rewardgym.render.passive_routines import (
+    FeedBackRoutine,
+    PresentationRoutine,
+)
+from rewardgym.render.response_routines import NAFCRoutine
 from rewardgym.stimuli import (
     STIMULUS_DEFAULTS,
     fixation_cross,
     generate_stimulus_properties,
     make_card_stimulus,
 )
-
-from rewardgym import check_random_state
-
-from rewardgym.render.passive_routines import PresentationRoutine, StateBasedDisplay, FeedBackRoutine
-from rewardgym.render import ImageDefinition
-from rewardgym.render.response_routines import NAFCRoutine
 
 
 def risksensitive_stimuli(random_state, stim_defaults=STIMULUS_DEFAULTS):
@@ -47,9 +48,11 @@ def risksensitive_stimuli(random_state, stim_defaults=STIMULUS_DEFAULTS):
     return image_map, stimuli
 
 
-def get_psychopy_info(
-    random_state=111, key_dict={"left": 0, "right": 1}, external_stimuli=None, fullpoints=None, **kwargs
+def get_render_info(
+    random_state=111, key_dict=None, external_stimuli=None, fullpoints=None, **kwargs
 ):
+    if key_dict is None:
+        key_dict = {"left": 0, "right": 1}
     random_state = check_random_state(random_state)
 
     if external_stimuli is None:
@@ -98,16 +101,16 @@ def get_psychopy_info(
 
     info_dict = {
         0: {
-            "psychopy": [
+            "render": [
                 base_stim,
                 selection_disp,
             ]
         },
-        1: {"psychopy": final_step},
-        2: {"psychopy": final_step},
-        3: {"psychopy": final_step},
-        4: {"psychopy": final_step},
-        5: {"psychopy": final_step},
+        1: {"render": final_step},
+        2: {"render": final_step},
+        3: {"render": final_step},
+        4: {"render": final_step},
+        5: {"render": final_step},
     }
 
     return info_dict, stimuli

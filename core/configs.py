@@ -1,5 +1,8 @@
+from rewardgym.tasks.utils import (
+    check_condition_present_or,
+    check_conditions_not_following,
+)
 from rewardgym.utils import check_random_state
-from rewardgym.tasks.utils import check_conditions_not_following, check_condition_present_or
 
 
 def get_configs(stimulus_set: str = "1"):
@@ -201,8 +204,7 @@ def get_configs(stimulus_set: str = "1"):
                     ]
                 )
                 and all(
-                    [
-                        check_conditions_not_following(conditions_proposal, jj)
+                    check_conditions_not_following(conditions_proposal, jj)
                         for jj in (
                             ["none_null", "null_none"],
                             ["none_save-20", "save-20_none"],
@@ -210,14 +212,11 @@ def get_configs(stimulus_set: str = "1"):
                             ["none_risky-40", "risky-40_none"],
                             ["none_risky-80", "risky-80_none"],
                         )
-                    ]
                 )
                 and check_conditions_not_following(conditions_proposal, test_trials)
                 and all(
-                    [
-                        check_conditions_not_following(conditions_proposal, [jj])
+                    check_conditions_not_following(conditions_proposal, [jj])
                         for jj in risky_non_equal_ev + risky_equal_ev
-                    ]
                 )
             )
 
