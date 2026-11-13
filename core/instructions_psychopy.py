@@ -1,7 +1,7 @@
 try:
     from psychopy.visual import ImageStim, TextBox2
 except ModuleNotFoundError:
-    from rewardgym.psychopy_render.psychopy_stubs import ImageStim, TextBox2
+    from rewardgym.stubs import ImageStim, TextBox2
 
 import json
 import pathlib
