@@ -7,7 +7,7 @@ from rewardgym.render.routines import (
     PresentationRoutine,
 )
 from rewardgym.render.routines import NAFCRoutine
-from rewardgym.stimuli import (
+from rewardgym.render.stimuli import (
     STIMULUS_DEFAULTS,
     fixation_cross,
     generate_stimulus_properties,
