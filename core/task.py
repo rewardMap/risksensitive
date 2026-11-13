@@ -1,18 +1,17 @@
 import itertools
-from collections import defaultdict
-from typing import Literal, Union
+import pathlib
+from typing import Literal
 
 import numpy as np
-import pathlib
 
-from rewardgym.reward_classes import BaseReward, PseudoRandomReward
 from rewardgym import check_random_state
+from rewardgym.reward_classes import BaseReward, PseudoRandomReward
 from rewardgym.tasks.yaml_tools import load_task_from_yaml
 
 
 def get_task(
-    render_backend: Literal["pygame", "psychopy"] = None,
-    random_state: Union[int, np.random.Generator] = 1000,
+    render_backend: Literal["pygame", "psychopy"] | None = None,
+    random_state: int | np.random.Generator = 1000,
     key_dict=None,
     **kwargs,
 ):
@@ -46,15 +45,15 @@ def get_task(
     }
 
     condition_meaning = {}
-    for kk in action_map.keys():
-        if len(action_map[kk]) == 2:
-            condition_meaning[kk] = (
-                reward_meaning[action_map[kk][0] + 1]
+    for key, value in action_map.items():
+        if len(value) == 2:
+            condition_meaning[key] = (
+                reward_meaning[value[0] + 1]
                 + "_"
-                + reward_meaning[action_map[kk][1] + 1]
+                + reward_meaning[value[1] + 1]
             )
-        elif len(action_map[kk]) == 1:
-            condition_meaning[kk] = reward_meaning[action_map[kk][0] + 1]
+        elif len(value) == 1:
+            condition_meaning[key] = reward_meaning[value[0] + 1]
 
     info_dict.update({"condition-meaning": condition_meaning})
 
