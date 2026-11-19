@@ -4,9 +4,9 @@ from rewardgym import check_random_state
 from rewardgym.render import ImageDefinition
 from rewardgym.render.routines import (
     FeedBackRoutine,
+    NAFCRoutine,
     PresentationRoutine,
 )
-from rewardgym.render.routines import NAFCRoutine
 from rewardgym.render.stimuli import (
     STIMULUS_DEFAULTS,
     fixation_cross,

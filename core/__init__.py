@@ -16,4 +16,4 @@ except (ImportError, NameError):
     get_instructions = None
 
 
-__all__ = ["get_configs" , "get_render_info", "get_task", "get_instructions"]
+__all__ = ["get_configs", "get_instructions", "get_render_info", "get_task"]
